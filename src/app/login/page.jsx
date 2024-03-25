@@ -1,16 +1,16 @@
-import { auth, signIn } from "@/utils/auth"
+import { Github } from 'lucide-react';
+import { handleGitHubLogin } from "@/utils/action";
 
 export default async function Login() {
-    const session = await auth()
-    console.log(session)
-    const handleGitHubLogin = async() =>{
-        "use server"
-        await signIn("github")
-    }
     return (
-        <form action={handleGitHubLogin}>
-            <p>Test</p>
-            <button className="border ">Login with github</button>
-        </form>
+        <div className="grid grid-cols-12 gap-4 border">
+            <Github></Github>
+            <>
+                <form action={handleGitHubLogin}>
+                    <p>Test</p>
+                    <button className="border ">Login with github</button>
+                </form>
+            </>
+        </div>
     )
 }
