@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button"
 
 export default function Home() {
   return (
@@ -13,11 +14,12 @@ export default function Home() {
       </div>
       <div className="flex col-span-2 col-start-2 mt-10 justify-between">
         <Link href="/register">
-          <Button className="bg-sky-500">Register</Button>
+          <Button className="bg-sky-500 h-16  " size="lg" >Register</Button>
         </Link>
         <Link href="login">
-          <Button className="bg-sky-500">Log in</Button>
+          <Button className="bg-sky-500 h-16 " size="lg">Log in</Button>
         </Link>
+
       </div>
     </div>
   );
