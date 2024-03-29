@@ -15,23 +15,30 @@ export const authConfig = {
                 const dbUser = await User.findOne({ email: profile.email })
                 if (dbUser) {
                     // If the user is found, use the database user ID instead of the GitHub ID
-                    token.id = dbUser.id;
-                    token.posts = dbUser.posts
+                    token._id = dbUser._id;
+                    token.posts = dbUser.posts,
+                        token.contact = dbUser.contact,
+                        token.bio = dbUser.bio
+                        token.createdAt = dbUser.createdAt
                 }
             }
             else if (user) {
+                // token.user = user;
                 token.username = user.username;
                 token.name = user.username
                 token.pfp = user.pfp;
-                token.id = user.id
+                token._id = user._id
                 token.posts = user.posts
             }
+            // console.log("TOKEN", token)
+
             return token;
         },
         async session({ session, token }) {
             if (token) {
+                console.log("TOKEN,", token)
                 session.user = token;
-                session.user.id = token.id
+                session.user.id = token._id
                 session.user.username = token.username
             }
             return session;
@@ -48,7 +55,7 @@ export const authConfig = {
             if (isOnProfile && !user) {
                 return false
             }
-            if(isOnPage && user){
+            if (isOnPage && user) {
                 return NextResponse.redirect(new URL('/home', request.url))
             }
             return true

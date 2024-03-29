@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import GitHub from "next-auth/providers/github"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { connectToDb } from "./utils";
+import { authConfig } from "./auth.config";
 import bcrypt from 'bcryptjs';
 
 const User = require("./models/user")
@@ -26,7 +27,8 @@ const login = async (credentials) => {
     }
 }
 
-export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
+export const { handlers: { GET, POST }, auth, signIn, signOut, update } = NextAuth({
+    ...authConfig,
     providers:
         [
             GitHub({
@@ -41,7 +43,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
                         if (!user) {
                             throw new Error("aaaa"); // Return null for failed login
                         } else {
-                            return { email: user.email, username: user.username, id: user._id, pfp: user.pfp }
+                            return user
                         }
                     } catch (error) {
                         console.error(error)
@@ -71,15 +73,17 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
             }
             return true
         },
-        async jwt({ token, user }) {
-            if (user) {
-                token.user = user;
-            }
-            return token;
-        },
-        async session({ session, token }) {
-            session.user = token.user;
-            return session;
-        },
+        //         async jwt({token, user}) {
+        //     if (user) {
+
+        //         token.user = user;
+        //     }
+        //     return token;
+        // },
+        // async session({session, token}) {
+        //     session.user = token.user;
+        //     return session;
+        // },
+        ...authConfig.callbacks,
     }
 })

@@ -21,7 +21,8 @@ const userSchema = new Schema({
         lowercase: true
     },
     bio: {
-        type: String
+        type: String,
+        default: "Too busy to write a bio :)"
     },
     pfp: {
         type: String,
@@ -42,7 +43,13 @@ const userSchema = new Schema({
     posts: [{
         type: Schema.Types.ObjectId,
         ref: 'Post',
-    }]
+    }],
+    contact: [
+        {
+            type: { type: String, required: true },
+            link: { type: String, required: true }
+        }
+    ]
 }, { timestamps: true });
 
 const User = mongoose.models?.User || mongoose.model('User', userSchema)
