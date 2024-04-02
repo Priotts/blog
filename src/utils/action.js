@@ -120,7 +120,6 @@ export const changeUsername = async (prevState, formData) => {
 export const changeBio = async (prevData, formData) => {
     const session = await auth()
     const newBio = formData.get('bio')
-    console.log(session.user._id)
     try {
         connectToDb()
         if (newBio.length === 0) {
@@ -131,7 +130,31 @@ export const changeBio = async (prevData, formData) => {
     } catch (error) {
         // console.log(error)
         return { success: false, message: error.message }
-        
+
     }
 }
 
+
+export const social = async (prevState, formData) => {
+    const session = await auth()
+    const github = formData.get("github")
+    const x = formData.get("x")
+    try {
+        connectToDb()
+        if (!github && !twitter) {
+            return { success: false, message: 'Enter at least one contact before saving' };
+          }
+        if (github.length > 0) {
+            const user = await User.findByIdAndUpdate(session.user._id, { 'contact.github': github }, { new: true })
+        } 
+        
+        if(x.length > 0){
+            const user = await User.findByIdAndUpdate(session.user._id,{'contact.twitter': x}, {new: true})
+        }
+        return { success: true, message: 'Contact successfully updated', }
+
+    } catch (error) {
+        return { success: false, message: error.message }
+
+    }
+}

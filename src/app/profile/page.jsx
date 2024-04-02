@@ -6,7 +6,6 @@ import Link from "next/link"
 export default async function Profile() {
     const session = await auth()
     const user = session.user
-    console.log("aaaaawdqawdqwdqwddqwqwdqwdqwddqwqwdqwdqwdqwddqwqwd",session)
     return (
         <div className="grid grid-cols-12  ">
             <div className="col-start-4 mt-24 border rounded-tl-lg rounded-br-lg">

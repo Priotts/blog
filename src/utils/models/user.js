@@ -44,12 +44,18 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Post',
     }],
-    contact: [
-        {
-            type: { type: String, required: true },
-            link: { type: String, required: true }
-        }
-    ]
+    contact: {
+        github: {
+            type: String,
+            trim: true,
+            default: null
+        },
+        twitter: {
+            type: String,
+            trim: true,
+            default: null
+        },
+    },
 }, { timestamps: true });
 
 const User = mongoose.models?.User || mongoose.model('User', userSchema)

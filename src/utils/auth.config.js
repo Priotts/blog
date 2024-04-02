@@ -10,6 +10,7 @@ export const authConfig = {
     callbacks: {
         async jwt({ token, user, account, profile }) {
             if (account?.provider === 'github' && user) {
+           
                 token.username = profile.login;
                 token.pfp = profile.avatar_url;
                 const dbUser = await User.findOne({ email: profile.email })
@@ -29,6 +30,9 @@ export const authConfig = {
                 token.pfp = user.pfp;
                 token._id = user._id
                 token.posts = user.posts
+                token.bio = user.bio
+                token.contact = user.contact
+                token.createdAt = user.createdAt
             }
             // console.log("TOKEN", token)
 
@@ -36,7 +40,6 @@ export const authConfig = {
         },
         async session({ session, token }) {
             if (token) {
-                console.log("TOKEN,", token)
                 session.user = token;
                 session.user.id = token._id
                 session.user.username = token.username
