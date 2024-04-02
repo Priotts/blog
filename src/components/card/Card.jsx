@@ -13,6 +13,7 @@ export default function Card({ users }) {
                     </div>
                 </div>
             ))}
+            
         </div>
     )
 }

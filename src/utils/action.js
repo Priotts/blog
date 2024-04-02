@@ -134,7 +134,6 @@ export const changeBio = async (prevData, formData) => {
     }
 }
 
-
 export const social = async (prevState, formData) => {
     const session = await auth()
     const github = formData.get("github")
