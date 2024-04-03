@@ -3,6 +3,7 @@
 import { auth, signIn, signOut, update } from "@/utils/auth"
 import { connectToDb } from "./utils"
 import User from "./models/user"
+import Post from "./models/post"
 import bcrypt from 'bcryptjs';
 import credentials from "next-auth/providers/credentials"
 import { AuthError } from "next-auth";
@@ -17,6 +18,8 @@ export const handleLogOut = async () => {
     await signOut("")
 }
 
+
+// REGISTER
 export const register = async (previusState, formData) => {
     const username = formData.get('username')
     const email = formData.get('email')
@@ -60,6 +63,7 @@ export const register = async (previusState, formData) => {
     }
 }
 
+// LOGIN
 export const login = async (previusState, formData) => {
     const username = formData.get('username')
     const password = formData.get('password')
@@ -82,6 +86,7 @@ export const login = async (previusState, formData) => {
     }
 };
 
+// SEARCH USER
 export const searchUser = async (username) => {
     try {
         const user = await User.findOne({ username: username })
@@ -92,6 +97,7 @@ export const searchUser = async (username) => {
     }
 }
 
+// CHANGE USERNAME
 export const changeUsername = async (prevState, formData) => {
     const session = await auth()
     const newUsername = formData.get('username')
@@ -105,8 +111,7 @@ export const changeUsername = async (prevState, formData) => {
             return { success: false, message: "Username not available" }
         }
         const updateUsername = await User.findByIdAndUpdate(session.user._id, { username: newUsername }, { runValidators: true, new: true })
-        console.log("true")
-        revalidatePath("/profile/settings")
+        revalidatePath("/profile")
         return { success: true, message: 'Username successfully updated' }
     } catch (error) {
 
@@ -117,6 +122,7 @@ export const changeUsername = async (prevState, formData) => {
     }
 }
 
+// CHANGE BIO
 export const changeBio = async (prevData, formData) => {
     const session = await auth()
     const newBio = formData.get('bio')
@@ -134,6 +140,7 @@ export const changeBio = async (prevData, formData) => {
     }
 }
 
+// UPDATE SOCIAL
 export const social = async (prevState, formData) => {
     const session = await auth()
     const github = formData.get("github")
@@ -142,18 +149,40 @@ export const social = async (prevState, formData) => {
         connectToDb()
         if (!github && !twitter) {
             return { success: false, message: 'Enter at least one contact before saving' };
-          }
+        }
         if (github.length > 0) {
             const user = await User.findByIdAndUpdate(session.user._id, { 'contact.github': github }, { new: true })
-        } 
-        
-        if(x.length > 0){
-            const user = await User.findByIdAndUpdate(session.user._id,{'contact.twitter': x}, {new: true})
         }
+
+        if (x.length > 0) {
+            const user = await User.findByIdAndUpdate(session.user._id, { 'contact.twitter': x }, { new: true })
+        }
+        revalidatePath("/profile")
         return { success: true, message: 'Contact successfully updated', }
 
     } catch (error) {
         return { success: false, message: error.message }
 
+    }
+}
+
+// ADD POST 
+export const createPost = async (prevState, formData) => {
+    const session = await auth()
+    const postContent = formData.get("post")
+    const user = await User.findById(session.user._id)
+    try {
+        connectToDb()
+        if (!postContent) {
+            return { success: false, message: 'Post cannot be empty' }
+        }
+        const post = new Post({ content: postContent, users: [user._id] })
+        await post.save()
+        await User.findByIdAndUpdate(user._id, { $push: { posts: post._id } }, { new: true })
+        revalidatePath("/home")
+        return {success: true, message:"Post successfully published"}
+    } catch (error) {
+        console.log(error)
+        return { success: false, message: error.message }
     }
 }

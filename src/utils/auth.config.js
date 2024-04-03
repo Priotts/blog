@@ -10,16 +10,15 @@ export const authConfig = {
     callbacks: {
         async jwt({ token, user, account, profile }) {
             if (account?.provider === 'github' && user) {
-           
                 token.username = profile.login;
                 token.pfp = profile.avatar_url;
                 const dbUser = await User.findOne({ email: profile.email })
                 if (dbUser) {
                     // If the user is found, use the database user ID instead of the GitHub ID
-                    token._id = dbUser._id;
-                    token.posts = dbUser.posts,
+                    token._id = dbUser._id,
+                        token.posts = dbUser.posts,
                         token.contact = dbUser.contact,
-                        token.bio = dbUser.bio
+                        token.bio = dbUser.bio,
                         token.createdAt = dbUser.createdAt
                 }
             }
@@ -34,8 +33,6 @@ export const authConfig = {
                 token.contact = user.contact
                 token.createdAt = user.createdAt
             }
-            // console.log("TOKEN", token)
-
             return token;
         },
         async session({ session, token }) {

@@ -16,7 +16,7 @@ export default async function Users({ numberOfItems, skipSetItems, pageNumber })
                 </Link>
 
                 <Link href={pageNumber === users.totalPage ? "" :`/home/?page=${pageNumber + 1}`}>
-                    <Button className="bg-sky-500">&gt;</Button>
+                    <Button className="bg-sky-500" disabled={pageNumber === users.totalPage ? true : false}>&gt;</Button>
                 </Link>
             </div>
         </div>

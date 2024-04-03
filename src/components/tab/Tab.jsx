@@ -10,7 +10,7 @@ export default function Tab({ user }) {
     const handleClick = (id) => {
         setTab(id)
     }
-    console.log("SSSSS", user)
+
     return (
         <>
             <div className="flex">

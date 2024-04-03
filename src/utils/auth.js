@@ -41,7 +41,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, update } = NextAu
                     try {
                         const user = await login(credentials)
                         if (!user) {
-                            throw new Error("aaaa"); // Return null for failed login
+                            throw new Error("Failed"); // Return null for failed login
                         } else {
                             return user
                         }

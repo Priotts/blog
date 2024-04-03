@@ -1,4 +1,5 @@
 import User from "./models/user"
+import Post from "./models/post"
 import { connectToDb } from "./utils"
 connectToDb()
 
@@ -13,9 +14,12 @@ export const getUser = async({numberOfItems,skipSetItems} )=>{
     }
 }
 
-export const getData = async( ) =>{
+export const getPosts = async({numberOfItems,skipSetItems}) =>{
+    console.log(numberOfItems)
     try {
-
+        const post = await Post.find().populate('users').limit(numberOfItems).skip(skipSetItems)
+        
+        return {success: true, post: post}
     } catch (error) {
         console.error(error)
         throw new Error("Error")

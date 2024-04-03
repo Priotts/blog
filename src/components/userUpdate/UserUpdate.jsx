@@ -41,7 +41,7 @@ export default function UserUpdate({ session }) {
                 <div className="col-start-4 col-span-2 mt-4">
                     <p className="text-lg font-semibold">Bio</p>
                     <form action={formActionBio}>
-                        <textarea name="bio" className="rounded mt-1 min-h-[150px] w-full resize-none" ></textarea>
+                        <textarea name="bio" className="rounded mt-1 min-h-[150px] px-3 py-2 text-sm ring-offset-background w-full resize-none" ></textarea>
                         <div className="col-start-1 ">
                             <Button className="h-fit my-1">Save</Button>
                         </div>
