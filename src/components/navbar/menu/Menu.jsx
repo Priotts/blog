@@ -33,7 +33,7 @@ export default async function Menu() {
                         </Link>
                     </Button>
                     <Button variant="outline" size="icon">
-                        <Link href="/profile">
+                        <Link href={`/profile/${session.user.username}`}>
                             <User />
                         </Link>
                     </Button>

@@ -3,25 +3,38 @@ import Post from "./models/post"
 import { connectToDb } from "./utils"
 connectToDb()
 
-export const getUser = async({numberOfItems,skipSetItems} )=>{
+export const getUser = async ({ numberOfItems, skipSetItems }) => {
     try {
         const count = await User.countDocuments();
         const user = await User.find().limit(numberOfItems).skip(skipSetItems)
         const totalPage = Math.ceil(count / numberOfItems)
-        return {data: user, count, totalPage}
+        return { data: user, count, totalPage }
     } catch (error) {
         return { success: false, message: error.message };
     }
 }
 
-export const getPosts = async({numberOfItems,skipSetItems}) =>{
+export const getPosts = async ({ numberOfItems, skipSetItems }) => {
     try {
         const count = await Post.countDocuments();
-        const post = await Post.find().populate('users').limit(numberOfItems).skip(skipSetItems)
+        const post = await Post.find()
+            .populate({ path: 'users', select: 'id username pfp' })
+            .sort({ createdAt: -1 })
+            .limit(numberOfItems)
+            .skip(skipSetItems)
         const totalPage = Math.ceil(count / numberOfItems)
-        return {success: true, post: post, count, totalPage}
+        return { success: true, post: post, count, totalPage }
     } catch (error) {
         console.error(error)
         throw new Error("Error")
+    }
+}
+
+export const userInfo = async (username) => {
+    try {
+        const user = await User.findOne({username: username}).populate({path: "posts", select: "content"})
+        return user
+    } catch (error) {
+        return { success: false, message: error.message };
     }
 }

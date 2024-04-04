@@ -12,7 +12,7 @@ export default function PostCard({ data }) {
                     </div>
                     <div className="w-full">
                         <div className="mt-4">
-                            <Link href={""} className="font-bold">
+                            <Link href={`/profile/${post.users[0].username}`} className="font-bold">
                                 {post.users[0].username}
                             </Link>
                         </div>
