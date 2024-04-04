@@ -2,7 +2,7 @@ import Link from "next/link";
 import Tab from "../tab/Tab";
 import { Button } from "../ui/button";
 
-export default function UserProfile({ username, pfp, createdAt, posts, bio, contact }) {
+export default function UserProfile({ session, username, pfp, createdAt, posts, bio, contact }) {
 	const contents = posts.map(post => post.content);
 	const github = contact.github;
 	const twitter = contact.twitter;
@@ -13,10 +13,9 @@ export default function UserProfile({ username, pfp, createdAt, posts, bio, cont
 			</div>
 			<div className="col-start-5 col-span-2 mt-28 ml-10  ">
 				<p className="mb-4 underline italic">{username}</p>
-				<Button variant="secondary">
+				{session.user.username === username ?<Button variant="secondary">
 					<Link href="/profile/settings">Setting</Link>
-				</Button>
-
+				</Button> : null}
 				<p className="text-sm mt-4">Joined: {createdAt}</p>
 			</div>
 			<div className="col-span-6 col-start-4 mt-12" >
