@@ -15,11 +15,11 @@ export const getUser = async({numberOfItems,skipSetItems} )=>{
 }
 
 export const getPosts = async({numberOfItems,skipSetItems}) =>{
-    console.log(numberOfItems)
     try {
+        const count = await Post.countDocuments();
         const post = await Post.find().populate('users').limit(numberOfItems).skip(skipSetItems)
-        
-        return {success: true, post: post}
+        const totalPage = Math.ceil(count / numberOfItems)
+        return {success: true, post: post, count, totalPage}
     } catch (error) {
         console.error(error)
         throw new Error("Error")

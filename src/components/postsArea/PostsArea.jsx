@@ -9,13 +9,16 @@ export default async function PostsArea({ numberOfItems, skipSetItems, pageNumbe
     return (
         <div className="">
             <PostCard data={data}></PostCard>
-            <Link href={pageNumber === 1 ? "" : `/home/?page=${pageNumber - 1}`} >
-                <Button className="bg-sky-500" >&lt;</Button>
-            </Link>
-
-            <Link href={pageNumber === data.totalPage ? "" : `/home/?page=${pageNumber + 1}`}>
-                <Button className="bg-sky-500" disabled={pageNumber === data.totalPage ? true : false}>&gt;</Button>
-            </Link>
+            <div className="flex justify-center">
+                <div className="flex justify-around w-2/3 ">
+                    <Link href={pageNumber === 1 ? "" : `/home/?page=${pageNumber - 1}`} >
+                        <Button className="bg-sky-500" disabled={pageNumber === 1 ? true : false} >&lt; Previous</Button>
+                    </Link>
+                    <Link href={pageNumber === fetchPost.totalPage ? "" : `/home/?page=${pageNumber + 1}`}>
+                        <Button className="bg-sky-500 " disabled={pageNumber === fetchPost.totalPage ? true : false}>Next &gt; </Button>
+                    </Link>
+                </div>
+            </div>
         </div>
     )
 }
