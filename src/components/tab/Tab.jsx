@@ -11,8 +11,6 @@ export default function Tab({ bio, posts, github, twitter, username }) {
     const handleClick = (id) => {
         setTab(id)
     }
-    console.log("posts length", posts.length)
-    console.log("visible value", visible)
     return (
         <>
             <div className="flex">

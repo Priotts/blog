@@ -86,12 +86,18 @@ export const login = async (previusState, formData) => {
     }
 };
 
+
 // SEARCH USER
 export const searchUser = async (username) => {
+    console.log("called")
     try {
         const user = await User.findOne({ username: username })
-        // console.log(user)
-        return user
+        if (!user) {
+            return { success: false, message: "User not found" }
+
+        }
+        revalidatePath("/home")
+        return { success: true, userPfp: user.pfp, username: user.username }
     } catch (error) {
         return { success: false, message: error.message }
     }
@@ -180,7 +186,7 @@ export const createPost = async (prevState, formData) => {
         await post.save()
         await User.findByIdAndUpdate(user._id, { $push: { posts: post._id } }, { new: true })
         revalidatePath("/home")
-        return {success: true, message:"Post successfully published"}
+        return { success: true, message: "Post successfully published" }
     } catch (error) {
         console.log(error)
         return { success: false, message: error.message }

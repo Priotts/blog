@@ -7,7 +7,7 @@ import { handleLogOut } from '@/utils/action';
 export default async function Menu() {
     const session = await auth()
     return (
-        <div className='flex justify-around items-center w-full h-full'>
+        <div className='flex justify-around items-center w-full h-full '>
             {!session ?
                 <>
                     <Button variant="outline" size="icon">

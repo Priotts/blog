@@ -3,16 +3,17 @@ import Post from "./models/post"
 import { connectToDb } from "./utils"
 connectToDb()
 
-export const getUser = async ({ numberOfItems, skipSetItems }) => {
+export const getUser = async (username) => {
     try {
-        const count = await User.countDocuments();
-        const user = await User.find().limit(numberOfItems).skip(skipSetItems)
-        const totalPage = Math.ceil(count / numberOfItems)
-        return { data: user, count, totalPage }
+        const user = await User.findOne({ username: username })
+        console.log(user.username)
+        return user.username
     } catch (error) {
-        return { success: false, message: error.message };
+        return null
     }
 }
+
+
 
 export const getPosts = async ({ numberOfItems, skipSetItems }) => {
     try {
@@ -32,7 +33,7 @@ export const getPosts = async ({ numberOfItems, skipSetItems }) => {
 
 export const userInfo = async (username) => {
     try {
-        const user = await User.findOne({username: username}).populate({path: "posts", select: "content"})
+        const user = await User.findOne({ username: username }).populate({ path: "posts", select: "content" })
         return user
     } catch (error) {
         return { success: false, message: error.message };

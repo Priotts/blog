@@ -6,6 +6,7 @@ export default function UserProfile({ session, username, pfp, createdAt, posts, 
 	const contents = posts.map(post => post.content);
 	const github = contact.github;
 	const twitter = contact.twitter;
+	const date = createdAt.split('T')[0];
 	return (
 		<div className="grid grid-cols-12  ">
 			<div className="col-start-4 mt-24 border rounded-tl-lg rounded-br-lg">
@@ -16,7 +17,7 @@ export default function UserProfile({ session, username, pfp, createdAt, posts, 
 				{session.user.username === username ?<Button variant="secondary">
 					<Link href="/profile/settings">Setting</Link>
 				</Button> : null}
-				<p className="text-sm mt-4">Joined: {createdAt}</p>
+				<p className="text-sm mt-4">Joined: {date}</p>
 			</div>
 			<div className="col-span-6 col-start-4 mt-12" >
 				<Tab bio={bio} posts={contents} github={github} twitter={twitter} username={username} />
