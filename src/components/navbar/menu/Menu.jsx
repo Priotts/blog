@@ -3,9 +3,12 @@ import { auth } from '@/utils/auth';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { handleLogOut } from '@/utils/action';
+import { getUserById } from '@/utils/data';
 
 export default async function Menu() {
     const session = await auth()
+    const sessionUser = await getUserById(session.user._id)
+   
     return (
         <div className='flex justify-around items-center w-full h-full '>
             {!session ?
@@ -33,7 +36,7 @@ export default async function Menu() {
                         </Link>
                     </Button>
                     <Button variant="outline" size="icon">
-                        <Link href={`/profile/${session.user.username}`}>
+                        <Link href={`/profile/${sessionUser}`}>
                             <User />
                         </Link>
                     </Button>

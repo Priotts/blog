@@ -13,7 +13,15 @@ export const getUser = async (username) => {
     }
 }
 
+export const getUserById = async (id) => {
+    try {
+        const user = await User.findById(id)
+        return user.username
+    } catch (error) {
+        return null
 
+    }
+}
 
 export const getPosts = async ({ numberOfItems, skipSetItems }) => {
     try {
