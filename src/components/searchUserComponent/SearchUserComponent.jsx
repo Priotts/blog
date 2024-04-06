@@ -26,7 +26,7 @@ export default function SearchUserComponent() {
             <Input type="search" name="username" placeholder="Search user..." className="mb-4" value={data} onChange={(e) => handleData(e)} />
             <div className=" bg-background rounded-md  ">
                 <Link href={`/profile/${user.username}`} className="flex items-center">
-                    <img src={user.userPfp}></img>
+                    <img src={user.userPfp} width={35} className="mx-4 "></img>
                     <p>{user.username}</p>
                 </Link>
             </div>

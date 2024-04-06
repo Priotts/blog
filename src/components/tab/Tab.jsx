@@ -13,7 +13,7 @@ export default function Tab({ bio, posts, github, twitter, username }) {
     }
     return (
         <>
-            <div className="flex">
+            <div className="flex justify-center lg:justify-start">
                 <Button className="mx-2" onClick={() => handleClick("bio")}>Bio</Button>
                 <Button className="mx-2" onClick={() => handleClick("post")}>Posts</Button>
                 <Button className="mx-2" onClick={() => handleClick("contact")}>Contact</Button>

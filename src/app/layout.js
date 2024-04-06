@@ -15,11 +15,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}  >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystemdisableTransitionOnChange>
-          <div className="grid grid-cols-12 gap-4  ">
-            <div className="col-span-12">
+          <div className="grid  lg:grid-cols-12 lg:borderlg:gap-4  ">
+            <div className="lg:col-span-12">
               <Navbar/>
             </div>
-            <div className="col-span-12 ">
+            <div className="lg:col-span-12 ">
               {children}
             </div>
           </div>

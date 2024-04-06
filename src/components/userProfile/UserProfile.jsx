@@ -8,11 +8,11 @@ export default function UserProfile({ sessionUser, username, pfp, createdAt, pos
 	const twitter = contact.twitter;
 	const date = createdAt.split('T')[0];
 	return (
-		<div className="grid grid-cols-12  ">
-			<div className="col-start-4 mt-24 border rounded-tl-lg rounded-br-lg">
+		<div className="flex flex-col items-center lg:grid lg:grid-cols-12">
+			<div className="col-start-4 mt-24 border rounded-tl-lg rounded-br-lg ">
 				<img src={pfp} alt="" width={200} className="rounded-2xl " />
 			</div>
-			<div className="col-start-5 col-span-2 mt-28 ml-10  ">
+			<div className="lg:col-start-5 lg:col-span-2 mt-4 lg:mt-28 lg:ml-10 ">
 				<p className="mb-4 underline italic">{username}</p>
 				{sessionUser === username ?<Button variant="secondary">
 					<Link href="/profile/settings">Setting</Link>

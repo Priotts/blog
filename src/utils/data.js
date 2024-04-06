@@ -6,7 +6,7 @@ connectToDb()
 export const getUser = async (username) => {
     try {
         const user = await User.findOne({ username: username })
-        console.log(user.username)
+        // console.log(user.username)
         return user.username
     } catch (error) {
         return null

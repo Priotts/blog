@@ -8,9 +8,9 @@ import Link from "next/link"
 export default async function Profile({params}) {
     const session = await auth()
     // const user = session.user
-    console.log("session", session.user.username)
+    // console.log("session", session.user.username)
     const user = await userInfo(session.user.username)
-    console.log("user", user)
+    // console.log("user", user)
     return (
         // <div className="grid grid-cols-12  ">
         //     <div className="col-start-4 mt-24 border rounded-tl-lg rounded-br-lg">

@@ -11,7 +11,7 @@ export default async function Home({ searchParams }) {
     const skipSetItems = (pageNumber - 1) * numberOfItems
     return (
         <div className="grid grid-cols-12 gap-4 ">
-            <div className="col-start-1 col-span-3 row-span-4 ml-4">
+            <div className="col-start-1 col-span-12 mt-4 lg:col-span-3 row-span-4 ml-4">
                 <SearchUserComponent></SearchUserComponent>
             </div>
             <div className="col-start-4 col-span-6 h-fit">

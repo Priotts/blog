@@ -10,7 +10,7 @@ export default async function PostsArea({ numberOfItems, skipSetItems, pageNumbe
         <div className="">
             <PostCard data={data}></PostCard>
             <div className="flex justify-center">
-                <div className="flex justify-around w-2/3 ">
+                <div className="flex justify-around lg:w-2/3 w-fit ">
                     <Link href={pageNumber === 1 ? "" : `/home/?page=${pageNumber - 1}`} >
                         <Button className="bg-sky-500" disabled={pageNumber === 1 ? true : false} >&lt; Previous</Button>
                     </Link>
