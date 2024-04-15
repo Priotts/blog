@@ -11,8 +11,6 @@ export default async function Menu() {
     !session ? null : sessionUser = await getUserById(session.user._id)
     // const sessionUser = await getUserById(session.user._id)
 
-    console.log(sessionUser)
-
     return (
         <div className='flex justify-around items-center w-full h-full '>
             {!session ?

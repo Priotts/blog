@@ -1,26 +1,40 @@
 "use client"
 
-import { changeBio, changeUsername, social } from "@/utils/action";
+import { changeBio, changeUsername, social, updatePfp } from "@/utils/action";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { useFormState } from 'react-dom'
 import { X, Github } from 'lucide-react';
 
-export default function UserUpdate({ session }) {
+export default function UserUpdate({ sessionPfp }) {
     const [state, formAction] = useFormState(changeUsername, undefined)
     const [stateBio, formActionBio] = useFormState(changeBio, undefined)
     const [stateContact, formActionContact] = useFormState(social, undefined)
+    const [statePfp, formActionPfp] = useFormState(updatePfp, undefined)
     return (
         <div className="grid grid-cols-12 gap-4">
-            <div className="col-start-2 font-semibold text-3xl">
+            <div className="col-start-2 font-semibold text-3xl p-4">
                 <p>Settings</p>
             </div>
-            <Separator className="col-span-12"></Separator>
+            <Separator className="col-span-12 "></Separator>
             <div className="col-start-2">
                 <div className="mt-14 mb-8 border rounded-tl-lg rounded-br-lg">
-                    <img src={session.user.pfp} alt="" width={200} className="rounded-2xl " />
+                    <img src={sessionPfp} alt="" width={200} className="rounded-2xl " />
                 </div>
-                <Button className="w-full">Change pfp</Button>
+                <div className="overflow-hidden ">
+                    <form action={formActionPfp}>
+                        <div className="grid w-full max-w-sm items-center gap-1.5">
+                            <label htmlFor="picture">Profile picture</label>
+                            <input type="file" name="pfp" />
+                        </div>
+                        <Button className='w-full mt-4'>Upload</Button>
+                        <div className="my-1 h-auto border ">
+                            {statePfp?.success === false ? <span className="text-rose-800 italic text-sm">{statePfp?.message}</span> : <span className="text-lime-600 italic text-sm">
+                                {statePfp?.message}
+                            </span>}
+                        </div>
+                    </form>
+                </div>
             </div>
             <div className="flex justify-center col-start-3 ">
                 <Separator orientation="vertical" ></Separator>

@@ -9,6 +9,15 @@ import credentials from "next-auth/providers/credentials"
 import { AuthError } from "next-auth";
 import { redirect } from 'next/navigation'
 import { revalidatePath } from "next/cache";
+import { v2 as cloudinary } from 'cloudinary';
+
+//CLOUDINARY CONFIG
+cloudinary.config({
+    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET,
+});
+
 
 export const handleGitHubLogin = async () => {
     await signIn('github')
@@ -89,7 +98,6 @@ export const login = async (previusState, formData) => {
 
 // SEARCH USER
 export const searchUser = async (username) => {
-    console.log("called")
     try {
         const user = await User.findOne({ username: username })
         if (!user) {
@@ -190,5 +198,29 @@ export const createPost = async (prevState, formData) => {
     } catch (error) {
         console.log(error)
         return { success: false, message: error.message }
+    }
+}
+
+//UPDATE PFP
+export const updatePfp = async (prevState, formData) => {
+    const session = await auth()
+    const file = formData.get('pfp')
+    try {
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = new Uint8Array(arrayBuffer);
+        return new Promise((resolve, reject) => {
+            cloudinary.uploader.upload_stream({}, async (error, result) => {
+                if (error) {
+                    console.error(error);
+                    resolve({ success: false, message: 'File cannot be empty' });
+                } else {
+                    const user = await User.findByIdAndUpdate(session.user.id, { pfp: result.url }, { new: true });
+                    revalidatePath("/");
+                    resolve({ success: true, message: 'Profile picture updated successfully' });
+                }
+            }).end(buffer);
+        });
+    } catch (error) {
+        return { success: false, message: error.message };
     }
 }

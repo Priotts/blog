@@ -3,9 +3,12 @@ import PostsArea from "@/components/postsArea/PostsArea";
 import SearchUserComponent from "@/components/searchUserComponent/SearchUserComponent";
 
 import { auth } from "@/utils/auth";
+import { getUserById, userInfo } from "@/utils/data";
 
 export default async function Home({ searchParams }) {
     const session = await auth()
+    const user = await getUserById(session.user._id)
+    const info = await userInfo(user)
     const pageNumber = Number(searchParams.page ?? 1)
     const numberOfItems = 5
     const skipSetItems = (pageNumber - 1) * numberOfItems
@@ -15,7 +18,7 @@ export default async function Home({ searchParams }) {
                 <SearchUserComponent></SearchUserComponent>
             </div>
             <div className="col-start-4 col-span-6 h-fit">
-                <CreatePost session={session}></CreatePost>
+                <CreatePost sessionPfp={info.pfp}></CreatePost>
             </div>
             <div className="col-start-4 col-span-6 ">
                 <PostsArea numberOfItems={numberOfItems} skipSetItems={skipSetItems} pageNumber={pageNumber}/>
