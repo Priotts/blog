@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="grid grid-cols-12 gap-4">
       <div className="col-span-5 col-start-2 mt-12">
-        <p className="font-mono italic font-semibold text-5xl lg:text-9xl  ">Elevate your <span className="underline decoration-sky-500"> connections </span>as dev</p>
+        <p className="font-mono italic font-semibold text-5xl lg:text-9xl  ">Elevate your <span className="underline decoration-sky-500"> connections </span></p>
       </div>
       <div className="flex col-span-5 col-start-2 lg:col-start-7 row-span-5 items-center justify-center">
         <Image src="Illustration.svg" width={500} height={500} alt="Illustration"></Image>

@@ -33,10 +33,8 @@ export default function LoginForm() {
                             <label htmlFor="password">Password</label>
                             <Input type="password" placeholder="password..." name="password" />
                         </div>
-                    </div>
-                    <CardFooter>
                         <Button className="bg-sky-500">Log in</Button>
-                    </CardFooter>
+                    </div>
                 </form>
             </CardContent>
             <div className="flex justify-center text-sm ">
