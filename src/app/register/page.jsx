@@ -1,7 +1,6 @@
 import RegisterForm from "@/components/registerForm/RegisterForm";
 import Image from "next/image";
 
-
 export default function Register() {
     return (
         <div className="grid grid-cols-12 gap-4 ">

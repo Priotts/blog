@@ -1,11 +1,7 @@
-
 import Image from 'next/image';
-import { auth } from "@/utils/auth";
 import LoginForm from '@/components/loginForm/LoginForm';
 
 export default async function Login() {
- 
-  
   return (
     <div className="grid grid-cols-12 gap-4 ">
       <div className="hidden lg:grid lg:col-span-5 lg:col-start-2 lg:row-span-10 lg:items-center lg:justify-center lg:mt-20">

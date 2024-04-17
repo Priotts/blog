@@ -73,17 +73,6 @@ export const { handlers: { GET, POST }, auth, signIn, signOut, update } = NextAu
             }
             return true
         },
-        //         async jwt({token, user}) {
-        //     if (user) {
-
-        //         token.user = user;
-        //     }
-        //     return token;
-        // },
-        // async session({session, token}) {
-        //     session.user = token.user;
-        //     return session;
-        // },
         ...authConfig.callbacks,
     }
 })

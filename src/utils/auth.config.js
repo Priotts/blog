@@ -1,7 +1,6 @@
 const User = require("./models/user")
 import { NextResponse } from 'next/server'
 
-
 export const authConfig = {
     pages: {
         signIn: "/",
