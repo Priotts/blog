@@ -28,7 +28,7 @@ export default function UserUpdate({ sessionPfp }) {
                             <input type="file" name="pfp" />
                         </div>
                         <Button className='w-full mt-4'>Upload</Button>
-                        <div className="my-1 h-auto border ">
+                        <div className="my-1 h-auto ">
                             {statePfp?.success === false ? <span className="text-rose-800 italic text-sm">{statePfp?.message}</span> : <span className="text-lime-600 italic text-sm">
                                 {statePfp?.message}
                             </span>}

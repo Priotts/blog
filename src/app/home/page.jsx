@@ -4,6 +4,8 @@ import SearchUserComponent from "@/components/searchUserComponent/SearchUserComp
 
 import { auth } from "@/utils/auth";
 import { getUserById, userInfo } from "@/utils/data";
+import { Suspense } from "react";
+import PostCardSkeleton from "@/components/skeleton/PostCardSkeleton";
 
 export default async function Home({ searchParams }) {
     const session = await auth()
@@ -21,7 +23,9 @@ export default async function Home({ searchParams }) {
                 <CreatePost sessionPfp={info.pfp}></CreatePost>
             </div>
             <div className="col-start-4 col-span-6 ">
-                <PostsArea numberOfItems={numberOfItems} skipSetItems={skipSetItems} pageNumber={pageNumber}/>
+                <Suspense fallback={<PostCardSkeleton></PostCardSkeleton>}>
+                    <PostsArea numberOfItems={numberOfItems} skipSetItems={skipSetItems} pageNumber={pageNumber} />
+                </Suspense>
             </div>
         </div>
     )
