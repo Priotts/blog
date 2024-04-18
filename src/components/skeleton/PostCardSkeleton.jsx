@@ -3,7 +3,7 @@ export default function PostCardSkeleton() {
         <div className="flex flex-col lg:flex-row items-center border rounded-tl-lg rounded-br-lg mb-4 w-full word-break: break-all"  >
             <div className="my-4 mx-4">
                 <div className="animate-pulse" >
-                    <div class=" bg-slate-700 h-10 w-10"></div>
+                    <div className=" bg-slate-700 h-10 w-10"></div>
                 </div>
             </div>
             <div className="w-full">

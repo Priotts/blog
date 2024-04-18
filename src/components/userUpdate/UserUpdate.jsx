@@ -3,14 +3,36 @@
 import { changeBio, changeUsername, social, updatePfp } from "@/utils/action";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import { useFormState } from 'react-dom'
+import { useFormState, useFormStatus } from 'react-dom'
 import { X, Github } from 'lucide-react';
+import { Loader2 } from "lucide-react"
+import UploadPfpButton from "../uploadPfpButton/UploadPfpButton";
 
 export default function UserUpdate({ sessionPfp }) {
     const [state, formAction] = useFormState(changeUsername, undefined)
     const [stateBio, formActionBio] = useFormState(changeBio, undefined)
     const [stateContact, formActionContact] = useFormState(social, undefined)
     const [statePfp, formActionPfp] = useFormState(updatePfp, undefined)
+
+    function ButtonLoading() {
+        return (
+            <Button disabled>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+            </Button>
+        )
+    }
+
+    function SubmitButton() {
+        const { pending } = useFormStatus()
+        console.log(pending)
+        return (
+            <Button className='w-full mt-4' disabled={pending}>
+                 {pending ? <ButtonLoading /> : "Upload"}
+            </Button>
+        )
+    }
+
     return (
         <div className="grid grid-cols-12 gap-4">
             <div className="col-start-2 font-semibold text-3xl p-4">
@@ -27,7 +49,7 @@ export default function UserUpdate({ sessionPfp }) {
                             <label htmlFor="picture">Profile picture</label>
                             <input type="file" name="pfp" />
                         </div>
-                        <Button className='w-full mt-4'>Upload</Button>
+                        <UploadPfpButton />
                         <div className="my-1 h-auto ">
                             {statePfp?.success === false ? <span className="text-rose-800 italic text-sm">{statePfp?.message}</span> : <span className="text-lime-600 italic text-sm">
                                 {statePfp?.message}
