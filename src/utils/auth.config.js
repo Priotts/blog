@@ -46,6 +46,7 @@ export const authConfig = {
             const user = auth?.user
             // console.log("auth", auth)
             const isOnPage = request.nextUrl?.pathname === "/"
+            const isOnRegister = request.nextUrl?.pathname === "/register"
             const isOnHome = request.nextUrl?.pathname.startsWith("/home")
             const isOnProfile = request.nextUrl?.pathname.startsWith("/profile")
             if (isOnHome && !user) {
@@ -55,6 +56,9 @@ export const authConfig = {
                 return false
             }
             if (isOnPage && user) {
+                return NextResponse.redirect(new URL('/home', request.url))
+            }
+            if (isOnRegister && user) {
                 return NextResponse.redirect(new URL('/home', request.url))
             }
             return true
