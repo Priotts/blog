@@ -24,12 +24,14 @@ export default function SearchUserComponent() {
     return (
         <div className="">
             <Input type="search" name="username" placeholder="Search user..." className="mb-4" value={data} onChange={(e) => handleData(e)} />
-            <div className=" bg-background rounded-md  ">
-                <Link href={`/profile/${user.username}`} className="flex items-center">
-                    <img src={user.userPfp} width={35} className="mx-4 "></img>
-                    <p>{user.username}</p>
-                </Link>
-            </div>
+            {user.success === true && <>
+                <div className=" bg-background rounded-md mx-2">
+                    <Link href={`/profile/${user.username}`} className="flex items-center h-16">
+                        <img src={user.userPfp} width={35} className="mx-4 "></img>
+                        <p>{user.username}</p>
+                    </Link>
+                </div>
+            </>}
         </div>
 
     )

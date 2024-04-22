@@ -216,7 +216,6 @@ export const updatePfp = async (prevState, formData) => {
                 } else {
                     const user = await User.findByIdAndUpdate(session.user.id, { pfp: result.url }, { new: true });
                     revalidatePath("/");
-                    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
                     resolve({ success: true, message: 'Profile picture updated successfully' });
                 }
             }).end(buffer);

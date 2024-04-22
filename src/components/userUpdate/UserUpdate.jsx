@@ -3,9 +3,8 @@
 import { changeBio, changeUsername, social, updatePfp } from "@/utils/action";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import { useFormState, useFormStatus } from 'react-dom'
+import { useFormState } from 'react-dom'
 import { X, Github } from 'lucide-react';
-import { Loader2 } from "lucide-react"
 import UploadPfpButton from "../uploadPfpButton/UploadPfpButton";
 
 export default function UserUpdate({ sessionPfp }) {
@@ -13,25 +12,6 @@ export default function UserUpdate({ sessionPfp }) {
     const [stateBio, formActionBio] = useFormState(changeBio, undefined)
     const [stateContact, formActionContact] = useFormState(social, undefined)
     const [statePfp, formActionPfp] = useFormState(updatePfp, undefined)
-
-    function ButtonLoading() {
-        return (
-            <Button disabled>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
-            </Button>
-        )
-    }
-
-    function SubmitButton() {
-        const { pending } = useFormStatus()
-        console.log(pending)
-        return (
-            <Button className='w-full mt-4' disabled={pending}>
-                 {pending ? <ButtonLoading /> : "Upload"}
-            </Button>
-        )
-    }
 
     return (
         <div className="grid grid-cols-12 gap-4">
