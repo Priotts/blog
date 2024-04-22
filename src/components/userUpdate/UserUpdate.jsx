@@ -15,12 +15,12 @@ export default function UserUpdate({ sessionPfp }) {
 
     return (
         <div className="grid grid-cols-12 gap-4">
-            <div className="col-start-2 font-semibold text-3xl p-4">
+            <div className="lg:col-start-2 font-semibold text-3xl p-4">
                 <p>Settings</p>
             </div>
             <Separator className="col-span-12 "></Separator>
-            <div className="col-start-2">
-                <div className="mt-14 mb-8 border rounded-tl-lg rounded-br-lg">
+            <div className="col-start-4 col-span-5 lg:col-start-2 lg:col-auto">
+                <div className="flex items-center justify-center lg:mt-14 lg:mb-8 border rounded-tl-lg rounded-br-lg">
                     <img src={sessionPfp} alt="" width={200} className="rounded-2xl " />
                 </div>
                 <div className="overflow-hidden ">
@@ -38,13 +38,13 @@ export default function UserUpdate({ sessionPfp }) {
                     </form>
                 </div>
             </div>
-            <div className="flex justify-center col-start-3 ">
+            <div className="hidden lg:flex lg:justify-center lg:col-start-3 ">
                 <Separator orientation="vertical" ></Separator>
             </div>
-            <div className="col-start-4 col-span-3 mt-4">
+            <div className="col-start-4 col-span-5 lg:col-start-4 lg:col-span-3 lg:mt-4">
                 <p className="text-lg font-semibold">Username</p>
                 <form action={formAction}>
-                    <input type="text" name="username" className="my-1 italic text-sm h-10 w-full px-1 rounded" placeholder="Your new username" />
+                    <input type="text" name="username" className="my-1 italic border text-sm h-10 w-full px-1 rounded" placeholder="Your new username" />
                     <div className="col-start-1 my-1">
                         <Button className="h-fit">Save</Button>
                     </div>
@@ -57,7 +57,7 @@ export default function UserUpdate({ sessionPfp }) {
                 <div className="col-start-4 col-span-2 mt-4">
                     <p className="text-lg font-semibold">Bio</p>
                     <form action={formActionBio}>
-                        <textarea name="bio" className="rounded mt-1 min-h-[150px] px-3 py-2 text-sm ring-offset-background w-full resize-none" ></textarea>
+                        <textarea name="bio" className="border rounded mt-1 min-h-[150px] px-3 py-2 text-sm ring-offset-background w-full resize-none" ></textarea>
                         <div className="col-start-1 ">
                             <Button className="h-fit my-1">Save</Button>
                         </div>
@@ -72,9 +72,9 @@ export default function UserUpdate({ sessionPfp }) {
                 <form action={formActionContact}>
                     <div className="my-2 ">
                         <Github />
-                        <input type="text" name="github" className="my-4 italic text-sm h-9 w-2/4 px-1 rounded" placeholder="your github name " />
+                        <input type="text" name="github" className="my-4 italic text-sm h-9 w-full lg:w-2/4 px-1 border rounded" placeholder="your github name " />
                         <X />
-                        <input type="text" name="x" className="my-4 italic text-sm h-9 w-2/4 px-1 rounded" placeholder="@your twitter name" />
+                        <input type="text" name="x" className="my-4 italic text-sm h-9 w-full lg:w-2/4 px-1 border rounded" placeholder="@your twitter name" />
                     </div>
                     <div className="col-start-1 my-1">
                         <Button className="h-fit">Save</Button>
