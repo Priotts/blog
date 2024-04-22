@@ -19,7 +19,7 @@ export default function UserProfile({ sessionUser, username, pfp, createdAt, pos
 				</Button> : null}
 				<p className="text-sm mt-4">Joined: {date}</p>
 			</div>
-			<div className="col-span-6 col-start-4 mt-12" >
+			<div className="col-span-6 col-start-4 mt-12 mb-6" >
 				<Tab bio={bio} posts={contents} github={github} twitter={twitter} username={username} />
 			</div>
 		</div>
