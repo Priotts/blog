@@ -68,7 +68,7 @@ export default function UserUpdate({ sessionPfp }) {
                         </div>
                     </form>
                 </div>
-                <p className="text-lg font-semibold">Social accounts</p>
+                <p className="text-lg font-semibold mt-4">Social accounts</p>
                 <form action={formActionContact}>
                     <div className="my-2 ">
                         <Github />

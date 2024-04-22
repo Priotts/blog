@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input"
 import { useRouter } from 'next/navigation'
 
 import { useFormState } from 'react-dom'
+import Link from "next/link";
 
 export default function LoginForm() {
     const [state, formAction] = useFormState(login, undefined);
@@ -53,6 +54,14 @@ export default function LoginForm() {
             <form action={handleGitHubLogin} className="flex justify-center pb-4">
                 <Button className="bg-sky-500"> GitHub</Button>
             </form>
+            <div className="relative mb-2 ">
+                <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground"><Link href="/register">register here</Link></span>
+                </div>
+            </div>
         </Card>
     )
 }
