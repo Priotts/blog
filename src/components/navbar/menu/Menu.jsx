@@ -21,7 +21,7 @@ export default async function Menu() {
                         </Link>
                     </Button>
                     <Button variant="outline" size="icon">
-                        <Link href="info">
+                        <Link href={`https://github.com/Priotts/blog`} target='_blank'>
                             <Info />
                         </Link>
                     </Button>
