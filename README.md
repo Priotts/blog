@@ -27,4 +27,16 @@ Setting environment variables
 ## 📃 Usage/Examples
 
 Registration Page
+![Nuovo progetto](https://github.com/Priotts/blog/assets/94853311/6f96ba04-36eb-460a-91fe-41d5a643a2fb)
 
+Login Page
+![Nuovo progetto (1)](https://github.com/Priotts/blog/assets/94853311/cbab97d3-cb4a-485c-a237-7dbfd0870b30)
+
+Posting Page
+![posting](https://github.com/Priotts/blog/assets/94853311/1e801406-ae2f-42f6-915c-613c918587b0)
+
+Profile Page
+![profile (1)](https://github.com/Priotts/blog/assets/94853311/76a7ab85-6333-4a69-ad8b-4bc914a5e977)
+
+Settings Page 
+![settings (1)](https://github.com/Priotts/blog/assets/94853311/1533df37-d037-4a6d-af86-514c74261b3d)
